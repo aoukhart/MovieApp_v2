@@ -22,25 +22,50 @@ class HomePage extends StatelessWidget {
           title: const Text('Movie App'),
         ),
         body: 
-        ListView(children: [
-          Obx(() {
+        RefreshIndicator(
+          onRefresh: controller.onRefresh,
+          child: 
+
+          // controller.pageState.value == LoadingState.error ? 
+            // Text("qweqweqwe"):
+           ListView(children: [
+            Obx(() {
+              print(controller.pageState.value);
+                if (controller.pageState.value == LoadingState.loaded){
+                  return PopularMovies(movies: controller.popularMovies);
+                }else if (controller.pageState.value == LoadingState.loading){
+                  return Container(
+                    height: 320,
+                    child: const Center(child: CircularProgressIndicator()));
+                }
+                return Container(
+                  height: Get.height*0.35,
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Icon(Icons.refresh, size: 35, color: Colors.white70,),
+                          Icon(Icons.arrow_downward, size: 30, color: Colors.white60,),
+                        ],
+                      ),
+                      Center(child: Text(textAlign: TextAlign.center,"Error try reloading!\nCheck ur internet",
+                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),)),
+                    ],
+                  ));
+            }),
+            const SizedBox(height: 5),
+            Obx(() {
               if (controller.pageState.value == LoadingState.loaded){
-                return PopularMovies(movies: controller.popularMovies);
+                return TopRatedMovies(movies: controller.topRatedMovies);
               }
+
               return Container(
                 height: 320,
-                child: const Center(child: CircularProgressIndicator()));
-          }),
-          const SizedBox(height: 10),
-          Obx(() {
-            if (controller.pageState.value == LoadingState.loaded){
-              return TopRatedMovies(movies: controller.topRatedMovies);
-            }
-            return Container(
-              height: 320,
-              child: const Center(child: CircularProgressIndicator()));
-          }),
-          const SizedBox(height: 8),
-        ]));
+                child: const Center(child: CircularProgressIndicator()));             
+            }),
+            const SizedBox(height: 8),
+          ]),
+        ));
   }
 }

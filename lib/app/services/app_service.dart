@@ -19,9 +19,14 @@ class AppService{
     if (films!.isEmpty == false && 
           films['popular'] != null && 
           films['topRated'] != null){      
+      print(films);
+      print(films['popular']);
       popular.assignAll(films["popular"]);
       topRated.assignAll(films['topRated']);
+      return Future(() => null);
     }
+    
+    print("empty");
   }
 
   Future<FilmDetail?> getFilmDetail({required int id}) async {
