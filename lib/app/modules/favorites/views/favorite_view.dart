@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:movie_app/app/modules/favorites/controller/favorite_controller.dart';
+import 'package:movie_app/app/routes/app_routes.dart';
 import 'package:movie_app/core/di/injection.dart';
 import 'package:movie_app/core/loading/loading_state.dart';
 
@@ -37,6 +38,11 @@ class FavoritePage extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.FILM_DETAIL, arguments: {
+                        'movie_id' : index
+                      });
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
@@ -90,12 +96,10 @@ class FavoritePage extends StatelessWidget {
                       ,onPressed: () {
                         controller.appService.deleteFilmOrAll(-1);
                         controller.refresh();
-                        // controller.favorite.clear();
                     }, child: 
                   const Text("     Delete all     ", style: TextStyle(color: Colors.white),)
                     
                     )
-                // IconButton(icon: const Icon(Icons.delete_forever_rounded),onPressed: () {
                   
                 // },)
                 ,

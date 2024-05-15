@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/app/modules/Home/controller/home_controller.dart';
-import 'package:movie_app/app/modules/Home/views/popular_movies.dart';
-import 'package:movie_app/app/modules/Home/views/top_rated_movies.dart';
+import 'package:movie_app/app/modules/Home/views/movieCarousel.dart';
+import 'package:movie_app/app/routes/app_routes.dart';
 import 'package:movie_app/core/di/injection.dart';
 import 'package:movie_app/core/loading/loading_state.dart';
 
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           actions: [
             IconButton(onPressed: () {
-              Get.toNamed("/favorite");
+              Get.toNamed(Routes.FAVORITE);
             }, icon: const Icon(Icons.list))
           ],
           centerTitle: true,
