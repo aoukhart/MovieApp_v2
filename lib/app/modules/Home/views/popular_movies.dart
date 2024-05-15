@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_app/app/data/models/film_model.dart';
+import 'package:movie_app/app/data/models/film/film_model.dart';
 import 'package:movie_app/app/routes/app_routes.dart';
 
-class PopularMovies extends StatelessWidget {
+class MovieCarousel extends StatelessWidget {
   final List<Film> movies;
-  PopularMovies(
+  MovieCarousel(
       {Key? key, required this.movies});
 
   @override
@@ -13,16 +13,6 @@ class PopularMovies extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            "TRENDING",
-            style: TextStyle(
-                color: Colors.white, fontSize: 25,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Poetsen One"),
-          ),
-        ),
         Container(
           height: 350,
           child: ListView.builder(
@@ -46,6 +36,7 @@ class PopularMovies extends StatelessWidget {
                           height: 280,
                           width: 200,
                           decoration: BoxDecoration(
+                            
                               image: DecorationImage(
                                   image: NetworkImage(
                                       // ignore: prefer_interpolation_to_compose_strings

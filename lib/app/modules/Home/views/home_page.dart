@@ -16,6 +16,11 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 41, 34, 34),
         appBar: AppBar(
+          actions: [
+            IconButton(onPressed: () {
+              Get.toNamed("/favorite");
+            }, icon: const Icon(Icons.list))
+          ],
           centerTitle: true,
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 90, 74, 74),
@@ -24,19 +29,43 @@ class HomePage extends StatelessWidget {
         body: 
         RefreshIndicator(
           onRefresh: controller.onRefresh,
-          child: 
-
-          // controller.pageState.value == LoadingState.error ? 
-            // Text("qweqweqwe"):
+          child:
            ListView(children: [
             Obx(() {
-              print(controller.pageState.value);
                 if (controller.pageState.value == LoadingState.loaded){
-                  return PopularMovies(movies: controller.popularMovies);
+                  return Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "TRENDING",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Poetsen One"),
+                        ),
+                      ),
+                      MovieCarousel(movies: controller.popularMovies),
+                      const SizedBox(height: 15),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "TOP RATED",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Poetsen One"),
+                        ),
+                      ),
+                      MovieCarousel(movies: controller.topRatedMovies),
+                      const SizedBox(height: 15)
+                    ],
+                  );
                 }else if (controller.pageState.value == LoadingState.loading){
-                  return Container(
-                    height: 320,
-                    child: const Center(child: CircularProgressIndicator()));
+                  return  Container(
+                      height: Get.height,
+                      child:const Center(
+                      child: CircularProgressIndicator()));
                 }
                 return Container(
                   height: Get.height*0.35,
@@ -54,17 +83,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ));
             }),
-            const SizedBox(height: 5),
-            Obx(() {
-              if (controller.pageState.value == LoadingState.loaded){
-                return TopRatedMovies(movies: controller.topRatedMovies);
-              }
 
-              return Container(
-                height: 320,
-                child: const Center(child: CircularProgressIndicator()));             
-            }),
-            const SizedBox(height: 8),
           ]),
         ));
   }

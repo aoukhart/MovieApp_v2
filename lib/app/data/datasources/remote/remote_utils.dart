@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/app/data/models/film_model.dart';
+import 'package:movie_app/app/data/models/film/film_model.dart';
 
 abstract class RemoteUtils{
   Future <List<Film>?> fetchPopularFilms();

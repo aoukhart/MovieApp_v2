@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app/data/models/film_model.dart';
+import 'package:movie_app/app/data/models/film/film_model.dart';
 
 class TopRatedMovies extends StatelessWidget {
   final List<Film> movies;

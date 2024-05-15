@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/app/data/models/film_detail_model.dart';
+import 'package:movie_app/app/data/models/film/film_detail_model.dart';
 
 abstract class RemoteFilmDetail{
   Future<FilmDetail?> getFilmDetails({required int id}); 

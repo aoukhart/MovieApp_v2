@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_app/app/modules/favorites/controller/favorite_controller.dart';
 import 'package:movie_app/app/modules/film_details/controller/film_detail_controller.dart';
 import 'package:movie_app/core/di/injection.dart';
 import 'package:movie_app/core/icons/pop_corn_icon.dart';
@@ -13,17 +14,30 @@ class MovieDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(getIt<FilmDetailController>());
-
+    // bool isFavorite = favorites_controller.appService.isFavorite(controller.film.value);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 41, 34, 34),
       appBar: AppBar(
+      actions: [
+        Obx(() {
+        return IconButton(onPressed:(){
+          if (controller.isFavorite.value == false){
+            controller.addFavorite(film: controller.film.value!);
+            controller.isFavorite.value = true;
+          }
+        }
+         , icon: Icon(controller.isFavorite.value ?
+          Icons.favorite :
+          Icons.favorite_border), color: const Color.fromARGB(90, 27, 21, 21),);
+        })
+      ],
       elevation: 0,
       centerTitle: true,
-      backgroundColor: const Color.fromARGB(255, 90, 74, 74),
+      backgroundColor: const Color.fromARGB(200, 90, 74, 74),
       title: const Text("Movie detail")),
       body: Obx(() {
         if (controller.pageState.value == LoadingState.loading){
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }else {
           // return Center(child: Text("${controller.film.value?.title}"));
                 return ListView.builder(
