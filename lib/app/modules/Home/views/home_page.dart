@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
             }, icon: const Icon(Icons.list))
           ],
           centerTitle: true,
-          elevation: 0,
+          elevation: 1,
           backgroundColor: const Color.fromARGB(255, 90, 74, 74),
           title: const Text('Movie App'),
         ),

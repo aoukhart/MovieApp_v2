@@ -15,7 +15,7 @@ abstract class LocalRepo{
 class LocalRepoImpl extends LocalRepo{
   Box? box;
   LocalRepoImpl(){
-    _init();
+    // _init();
   } 
 
   void _init() async {
@@ -30,8 +30,10 @@ class LocalRepoImpl extends LocalRepo{
     }
     if (box?.get(film.title) == null){
       final cachedImg = await cacheImage("https://images.tmdb.org/t/p/w500"+film.poster);
-      final fav = Favorite(title: film.title, poster: cachedImg.path, overview: film.overview);
+      final fav = Favorite(id: film.id ,title: film.title, poster: cachedImg.path, overview: film.overview);
+      print(fav.id);
       box?.put(film.title, fav);
+      print("cached ${box?.get(film.id)}");
       return fav;
     }else{
       print("${film.title} already cached");
@@ -41,10 +43,15 @@ class LocalRepoImpl extends LocalRepo{
 
   @override
   Future<List<Favorite>?> getFavoriteFilms() async {
-    if (await Hive.boxExists("favoriteBox")){
-      final favorites = box?.values.map<Favorite>((element) => element).toList();
-      return favorites;
-    }
+    try {
+  if (await Hive.boxExists("favoriteBox")){
+    final favorites = box?.values.map<Favorite>((element) => element).toList();
+    return favorites;
+  }
+} catch (e) {
+      print("*/*/*/*/*/*/*/*/*/*/*/*");
+  // TODO
+}
     return Future(() => null);
   }
 
@@ -56,8 +63,13 @@ class LocalRepoImpl extends LocalRepo{
       box?.clear();
       await DefaultCacheManager().emptyCache();
     }else{
-      box?.delete(filmId);
       print("deleting $filmId");
+      print(box?.get(filmId).title);
+      print(box?.get(filmId).poster);
+      await DefaultCacheManager().removeFile(box?.get(filmId).poster);
+      box?.delete(filmId);
+      
+      // print("======>" + box?.values.firstWhere((element) => element.title == filmId));
     }
     return Future(() => null);
   }

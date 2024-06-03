@@ -49,7 +49,13 @@ class AppService{
   }
 
   Future<void> getFavorite() async {
-     favorite.value =  await localRepo.getFavoriteFilms() as List<Favorite>;
+    try {
+      favorite.value =  await localRepo.getFavoriteFilms() as List<Favorite>;
+    }catch (e){
+      // TODO
+      // print("*/*/*/*/*/*/*/*/*/*/*/*");
+
+    }
      return Future(() => null);
   }
 
@@ -58,6 +64,7 @@ class AppService{
       await localRepo.deleteItemOrAll("");
       favorite.clear();
     }else{
+      
       await localRepo.deleteItemOrAll(favorite.elementAt(index).title);
       favorite.removeAt(index);
     }
@@ -69,7 +76,7 @@ class AppService{
       favorite.value.singleWhere((element) => element.title == film!.title);
       return true;
     }catch(e){
-      print("=> $e");
+      // print("=> $e");
       return false;
     }
   }

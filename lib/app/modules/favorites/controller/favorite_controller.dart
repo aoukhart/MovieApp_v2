@@ -11,6 +11,7 @@ class FavoriteController extends GetxController{
   final AppService appService;
   FavoriteController(this.appService);
   RxList<Favorite> get favorite => appService.favorite;
+  // RxBool hasConection =
 
   @override
   void onInit() async {

@@ -22,6 +22,7 @@ class FilmDetailController extends GetxController{
   Future<void> getDetails() async {
       pageState.value = LoadingState.loading;
       final movieId = Get.arguments['movie_id'];
+      print("movie id is : $movieId");
       if(movieId == null) return;
       film.value = await appService.getFilmDetail(id: movieId);
       isFavorite.value = appService.isFavorite(film.value);

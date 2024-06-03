@@ -40,9 +40,9 @@ class FavoritePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       Get.toNamed(Routes.FILM_DETAIL, arguments: {
-                        'movie_id' : index
+                        'movie_id' : favorite[index].id
                       });
-                    },
+                      },
                     child: Container(
                       decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
@@ -70,7 +70,12 @@ class FavoritePage extends StatelessWidget {
                           const SizedBox(width: 20),
                           IconButton(
                             onPressed: () { 
-                              controller.appService.deleteFilmOrAll(index);
+                              if (index == favorite.length-1) {
+                                controller.appService.deleteFilmOrAll(-1);
+                                controller.refresh();
+                              }
+                              else
+                                controller.appService.deleteFilmOrAll(index);
                             },
                             icon: const Icon(Icons.delete,color: Color.fromARGB(200, 27, 21, 21),size: 30)
                           )
@@ -107,7 +112,9 @@ class FavoritePage extends StatelessWidget {
               )
             ],
         ),
-        LoadingState.error => Text("error"),
+        LoadingState.error => Center(
+          child: Text("Something wrong happened\nTry reloading your app", style: TextStyle(color: Colors.white38),),
+        ),
         LoadingState.empty => Center(
           child: Text("No films liked", style: TextStyle(color: Colors.white38),),
         )

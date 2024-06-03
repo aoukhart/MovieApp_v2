@@ -5,16 +5,21 @@ part 'favorite.g.dart';
 @HiveType(typeId: 1)
 class Favorite {
   @HiveField(0)
+  int id;
+  
+  @HiveField(1)
   String title;
 
-  @HiveField(1)
+  @HiveField(2)
   String poster;
 
-  @HiveField(2)
+  @HiveField(3)
   String overview;
 
-  Favorite({required this.title, 
-          required this.poster, 
-          required this.overview
+  Favorite({
+    required this.id,
+    required this.title, 
+    required this.poster, 
+    required this.overview
   });
 }
