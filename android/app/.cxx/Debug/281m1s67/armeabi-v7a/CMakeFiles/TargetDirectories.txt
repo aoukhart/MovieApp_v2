@@ -1,0 +1,2 @@
+/home/an4s/Desktop/42Mobile/MovieApp/android/app/.cxx/Debug/281m1s67/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/an4s/Desktop/42Mobile/MovieApp/android/app/.cxx/Debug/281m1s67/armeabi-v7a/CMakeFiles/rebuild_cache.dir
