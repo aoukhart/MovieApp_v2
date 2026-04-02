@@ -10,8 +10,9 @@ It includes key features such as :
  - Fetches trending & top rated movies from Imdb Api with complete details.
  - Save & cache your favorite movies to access them even offline.
 <br></br>
+## Preview
 <div align="center">
-  <video name="video" src="https://github.com/user-attachments/assets/e7aebe4f-c038-487a-a347-b0509f67550b"/>
+  <video src="https://github.com/user-attachments/assets/e7aebe4f-c038-487a-a347-b0509f67550b"/>
 </div>
 
 
